@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Interactive Fixed Navigation Menu</title>
+<style>
+  /* CSS Custom Properties for theming */
+  :root {
+    --color-bg: #ffffff;
+    --color-text: #374151;
+    --color-text-muted: #6b7280;
+    --color-primary: #111827;
+    --color-primary-light: #374151;
+    --color-hover-bg: #f3f4f6;
+    --color-scroll-bg: rgba(255 255 255 / 0.95);
+    --color-scroll-border: #e5e7eb;
+    --transition-duration: 0.3s;
+    --nav-height: 64px;
+    --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  /* Import Inter font from Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap');
+
+  html {
+    font-family: var(--font-family);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Fixed navigation bar */
+  nav {
+    --nav-padding-vertical: 0.75rem;
+    --nav-padding-horizontal: 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--nav-padding-vertical) var(--nav-padding-horizontal);
+    box-sizing: border-box;
+    z-index: 1000;
+    transition:
+      background-color var(--transition-duration) ease,
+      box-shadow var(--transition-duration) ease,
+      border-bottom var(--transition-duration) ease;
+  }
+
+  nav.scrolled {
+    background-color: var(--color-scroll-bg);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--color-scroll-border);
+  }
+
+  /* Container inside nav */
+  .container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Logo */
+  .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    user-select: none;
+  }
+
+  /* Navigation menu */
+  ul.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul.nav-menu li {
+    position: relative;
+  }
+
+  ul.nav-menu li a {
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--color-primary-light);
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    display: inline-block;
+    transition:
+      color var(--transition-duration) ease,
+      transform var(--transition-duration) ease;
+    border-radius: 0.375rem;
+  }
+
+  ul.nav-menu li a:hover,
+  ul.nav-menu li a:focus {
+    color: var(--color-primary);
+    background-color: var(--color-hover-bg);
+    transform: scale(1.05);
+    outline: none;
+  }
+
+  /* Add focus-visible style for accessibility */
+  ul.nav-menu li a:focus-visible {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  }
+
+  /* Page content below nav */
+  main {
+    max-width: 900px;
+    margin: calc(var(--nav-height) + 2rem) auto 4rem auto;
+    padding: 0 1rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  section {
+    margin-bottom: 4rem;
+  }
+</style>
+</head>
+<body>
+<nav id="navbar" aria-label="Primary navigation">
+  <div class="container">
+    <div class="logo" tabindex="0">BrandLogo</div>
+    <ul class="nav-menu">
+      <li><a href="#home" tabindex="0">Home</a></li>
+      <li><a href="#features" tabindex="0">Features</a></li>
+      <li><a href="#pricing" tabindex="0">Pricing</a></li>
+      <li><a href="#about" tabindex="0">About</a></li>
+      <li><a href="#contact" tabindex="0">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section id="home">
+    <h1>Welcome to Our Site</h1>
+    <p>This is an interactive fixed navigation menu demo.</p>
+  </section>
+
+  <section id="features">
+    <h2>Features</h2>
+    <p>Explore the benefits of our product with smooth transitions and elegant design.</p>
+  </section>
+
+  <section id="pricing">
+    <h2>Pricing</h2>
+    <p>Choose from several plans that fit your needs and budget.</p>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Learn more about our company and team.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Get in touch with us for inquiries or support.</p>
+  </section>
+</main>
+
+<script>
+  // Script to toggle nav background when scrolling
+  (function() {
+    const navbar = document.getElementById('navbar');
+    function onScroll() {
+      if(window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+    window.addEventListener('scroll', onScroll);
+    // Initial check in case page is loaded with scroll
+    onScroll();
+  })();
+</script>
+</body>
+</html>
